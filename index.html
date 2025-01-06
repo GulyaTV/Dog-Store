@@ -135,22 +135,22 @@
     const apps = [
       {
         name: "The DOGS",
-        description: "The DOGS - это игра, которая позволяет игрокам окунуться в жизнь собаки.",
+        description: "Описание: The DOGS - это игра, которая позволяет игрокам окунуться в жизнь собаки.",
         dev: "Разработчик: Gulya TV Games",
         pub: "Издатель: Gulya TV Games",
-        ver: "Alpha 2.7",
-        ver_test: "Alpha 3.0",
+        ver: "Версия: Alpha 2.7",
+        ver_test: "Тест. версия: Alpha 3.0",
         message: "Alpha 3.0 и Beta 0.5 отсутствуют, т.е. тестовой версии нет для Android",
         downloadUrl: "https://github.com/GulyaTV/TheDOGS_for_launcher/releases/download/2.7-alpha/The_DOGS_Alpha_2.7_Android.apk",
         downloadUrltest: "https://github.com/GulyaTV/TheDOGS_for_launcher/releases/download/2.7-alpha/The_DOGS_Alpha_2.7_Android.apk"
       },
       {
         name: "Wroom",
-        description: "Wroom - это симулятор вождения, в игре есть большой выбор пиксельных машин.",
-        dev: "Разработчик: Wroom Studio", dev: "и Gulya TV Games",
+        description: "Описание: Wroom - это симулятор вождения, в игре есть большой выбор пиксельных машин.",
+        dev: "Разработчик: Wroom Studio и Gulya TV Games",
         pub: "Издатель: Gulya TV Games",
-        ver: "Alpha 1.0.11.3",
-        ver_test: "Alpha 1.0.12",
+        ver: "Версия: Alpha 1.0.11.3",
+        ver_test: "Тест. версия: Alpha 1.0.12",
         message: "Alpha 1.0.12 - тествая версия, т.е. могут присутствовать баги", 
         downloadUrl: "https://github.com/Wroom-Studio/wroom_for_launcher/releases/download/1.0.11.3-alpha-test/Wroom_Alpha_Test_1.0.11.3_Android.apk",
         downloadUrltest: "https://github.com/Wroom-Studio/wroom_for_launcher/releases/download/1.0.12-alpha/Wroom_Alpha_1.0.12_Android.apk"
@@ -200,8 +200,7 @@
         <p>${app.description}</p>
         <p>${app.dev}</p>
         <p>${app.pub}</p>
-        <p>${app.ver}</p>
-        <p>${app.ver_test}</p>
+        <p>${app.ver}, ${app.ver_test}</p>
         <p>${app.message}</p>
         <a href="${app.downloadUrl}" class="download-btn" download>Скачать APK</a>
         <a href="${app.downloadUrltest}" class="download-btn" download>Скачать тестовуй версию</a>
