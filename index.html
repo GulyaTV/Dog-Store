@@ -123,7 +123,7 @@
   <div class="app-list" id="app-list">
     <!-- Приложения будут загружены сюда -->
   </div>
-  <div>&copy Гуля ТВ 2025. Все права защищены.</div>
+  <center>&copy Гуля ТВ 2025. Все права защищены.</center>
 
   <!-- Уведомление -->
   <div class="notification" id="notification">
@@ -198,8 +198,7 @@
       appCard.innerHTML = `
         <h2>${app.name}</h2>
         <p>${app.description}</p>
-        <p>${app.dev}</p>
-        <p>${app.pub}</p>
+        <p>${app.dev}, ${app.pub}</p>
         <p>${app.ver}, ${app.ver_test}</p>
         <p>${app.message}</p>
         <a href="${app.downloadUrl}" class="download-btn" download>Скачать APK</a>
