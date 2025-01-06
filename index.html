@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog Store</title>
+  <style>
+    /* CSS-переменные для светлой темы */
+    :root {
+      --background-color: #f4f4f9;
+      --text-color: #333;
+      --card-background: white;
+      --card-border: #ddd;
+      --primary-color: #4CAF50;
+      --primary-hover-color: #45a049;
+      --notification-background: #4CAF50;
+      --notification-text: white;
+    }
+
+    /* CSS-переменные для тёмной темы */
+    [data-theme="dark"] {
+      --background-color: #1e1e1e;
+      --text-color: #f4f4f9;
+      --card-background: #2d2d2d;
+      --card-border: #444;
+      --primary-color: #4CAF50;
+      --primary-hover-color: #45a049;
+      --notification-background: #4CAF50;
+      --notification-text: white;
+    }
+
+    /* Общие стили */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary-color);
+    }
+
+    .theme-switcher {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .theme-switcher:hover {
+      background-color: var(--primary-hover-color);
+    }
+
+    .app-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .app-card {
+      background-color: var(--card-background);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .app-card h2 {
+      margin: 0 0 10px;
+      color: var(--primary-color);
+    }
+
+    .app-card p {
+      margin: 0 0 15px;
+      color: var(--text-color);
+    }
+
+    .download-btn {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .download-btn:hover {
+      background-color: var(--primary-hover-color);
+    }
+
+    .notification {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--notification-background);
+      color: var(--notification-text);
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Кнопка переключения темы -->
+  <button class="theme-switcher" id="theme-switcher">Тёмная тема</button>
+
+  <h1>Dog Store</h1>
+  <div class="app-list" id="app-list">
+    <!-- Приложения будут загружены сюда -->
+  </div>
+
+  <!-- Уведомление -->
+  <div class="notification" id="notification">
+    Файл скачан. Откройте его, чтобы начать установку.
+  </div>
+
+  <script>
+    // Список приложений
+    const apps = [
+      {
+        name: "The DOGS",
+        description: "The DOGS - это игра, которая позволяет игрокам окунуться в жизнь собаки.",
+        ver: "Alpha 2.7",
+        message: "Alpha 3.0 и Beta 0.5 отсутствуют",
+        downloadUrl: "https://github.com/GulyaTV/TheDOGS_for_launcher/releases/download/2.7-alpha/The_DOGS_Alpha_2.7_Android.apk"
+      },
+      {
+        name: "Wroom",
+        description: "Wroom - это симулятор вождения, в игре есть большой выбор пиксельных машин.",
+        ver: "Alpha 1.0.11.3",
+        ver_test: "Alpha 1.0.12",
+        downloadUrl: "https://github.com/Wroom-Studio/wroom_for_launcher/releases/download/1.0.11.3-alpha-test/Wroom_Alpha_Test_1.0.11.3_Android.apk",
+        downloadUrltest: "https://github.com/Wroom-Studio/wroom_for_launcher/releases/download/1.0.12-alpha/Wroom_Alpha_1.0.12_Android.apk"
+      }
+    ];
+
+    // Элементы DOM
+    const appList = document.getElementById("app-list");
+    const notification = document.getElementById("notification");
+    const themeSwitcher = document.getElementById("theme-switcher");
+
+    // Проверяем сохранённую тему в localStorage
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      themeSwitcher.textContent = savedTheme === "dark" ? "Светлая тема" : "Тёмная тема";
+    }
+
+    // Переключение темы
+    themeSwitcher.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      if (currentTheme === "dark") {
+        document.documentElement.removeAttribute("data-theme");
+        themeSwitcher.textContent = "Тёмная тема";
+        localStorage.setItem("theme", "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        themeSwitcher.textContent = "Светлая тема";
+        localStorage.setItem("theme", "dark");
+      }
+    });
+
+    // Функция для показа уведомления
+    function showNotification() {
+      notification.style.display = "block";
+      setTimeout(() => {
+        notification.style.display = "none";
+      }, 5000); // Уведомление исчезнет через 5 секунд
+    }
+
+    // Создание карточек приложений
+    apps.forEach(app => {
+      const appCard = document.createElement("div");
+      appCard.className = "app-card";
+      appCard.innerHTML = `
+        <h2>${app.name}</h2>
+        <p>${app.description}</p>
+        <p>${app.ver}</p>
+        <p>${app.ver_test}</p>
+        <p>${app.message}</p>
+        <a href="${app.downloadUrl}" class="download-btn" download>Скачать APK</a>
+        <a href="${app.downloadUrltest}" class="download-btn" download>Скачать тестовуй версию</a>
+      `;
+      appList.appendChild(appCard);
+
+      // Добавляем обработчик события для кнопки скачивания
+      const downloadButton = appCard.querySelector(".download-btn");
+      downloadButton.addEventListener("click", () => {
+        showNotification();
+      });
+    });
+  </script>
+</body>
+</html>
