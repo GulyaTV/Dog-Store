@@ -123,6 +123,7 @@
   <div class="app-list" id="app-list">
     <!-- Приложения будут загружены сюда -->
   </div>
+  <div>&copy Гуля ТВ 2025. Все права защищены.</div>
 
   <!-- Уведомление -->
   <div class="notification" id="notification">
@@ -135,6 +136,8 @@
       {
         name: "The DOGS",
         description: "The DOGS - это игра, которая позволяет игрокам окунуться в жизнь собаки.",
+        dev: "Разработчик: Gulya TV Games",
+        pub: "Издатель: Gulya TV Games",
         ver: "Alpha 2.7",
         ver_test: "Alpha 3.0",
         message: "Alpha 3.0 и Beta 0.5 отсутствуют, т.е. тестовой версии нет для Android",
@@ -144,6 +147,8 @@
       {
         name: "Wroom",
         description: "Wroom - это симулятор вождения, в игре есть большой выбор пиксельных машин.",
+        dev: "Разработчик: Wroom Studio", dev: "и Gulya TV Games",
+        pub: "Издатель: Gulya TV Games",
         ver: "Alpha 1.0.11.3",
         ver_test: "Alpha 1.0.12",
         message: "Alpha 1.0.12 - тествая версия, т.е. могут присутствовать баги", 
@@ -193,6 +198,8 @@
       appCard.innerHTML = `
         <h2>${app.name}</h2>
         <p>${app.description}</p>
+        <p>${app.dev}</p>
+        <p>${app.pub}</p>
         <p>${app.ver}</p>
         <p>${app.ver_test}</p>
         <p>${app.message}</p>
