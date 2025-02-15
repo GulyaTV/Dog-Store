@@ -1,222 +1,273 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dog Store</title>
-  <style>
-    /* CSS-переменные для светлой темы */
-    :root {
-      --background-color: #f4f4f9;
-      --text-color: #333;
-      --card-background: white;
-      --card-border: #ddd;
-      --primary-color: #4CAF50;
-      --primary-hover-color: #45a049;
-      --notification-background: #4CAF50;
-      --notification-text: white;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DogStore - Магазин приложений для Android</title>
+    <style>
+        /* Previous styles remain the same */
+       * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-    /* CSS-переменные для тёмной темы */
-    [data-theme="dark"] {
-      --background-color: #1e1e1e;
-      --text-color: #f4f4f9;
-      --card-background: #2d2d2d;
-      --card-border: #444;
-      --primary-color: #4CAF50;
-      --primary-hover-color: #45a049;
-      --notification-background: #4CAF50;
-      --notification-text: white;
-    }
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
 
-    /* Общие стили */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s;
-    }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-    h1 {
-      text-align: center;
-      color: var(--primary-color);
-    }
+        .app-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    .theme-switcher {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: var(--primary-color);
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+        .app-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
 
-    .theme-switcher:hover {
-      background-color: var(--primary-hover-color);
-    }
+        .app-card:hover {
+            transform: translateY(-5px);
+        }
 
-    .app-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
+            display: block;
+            margin: 0 auto 15px;
+        }
 
-    .app-card {
-      background-color: var(--card-background);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+        .app-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
 
-    .app-card h2 {
-      margin: 0 0 10px;
-      color: var(--primary-color);
-    }
+        .developer {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
 
-    .app-card p {
-      margin: 0 0 15px;
-      color: var(--text-color);
-    }
+        .version {
+            color: #888;
+            font-size: 0.8em;
+            margin-bottom: 15px;
+        }
 
-    .download-btn {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-      margin-top: 4px;
-      margin-bottom: 4px;
-    }
+        .description {
+            color: #444;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
 
-    .download-btn:hover {
-      background-color: var(--primary-hover-color);
-    }
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
 
-    .notification {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: var(--notification-background);
-      color: var(--notification-text);
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      display: none;
-    }
-    .copy {
-      margin-top: 10px;
-    }
-  </style>
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+
+        .updates-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .update-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .install-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+    </style>
 </head>
 <body>
-  <!-- Кнопка переключения темы -->
-  <button class="theme-switcher" id="theme-switcher">Тёмная тема</button>
+    <div class="header">
+        <h1>DogStore</h1>
+        <p>Магазин приложений для Android</p>
+    </div>
 
-  <h1>Dog Store</h1>
-  <div class="app-list" id="app-list">
-    <!-- Приложения будут загружены сюда -->
-  </div>
-  <div class="copy"><center>&copy Гуля ТВ 2025. Все права защищены.</center></div>
+    <div class="updates-container">
+        <h2>Последние обновления</h2>
+        <div class="update-item">
+            <span>Wroom Alpha 1.0.11.3</span>
+            <span class="update-date">Новое: Добавлено 5 новых автомобилей</span>
+        </div>
+        <div class="update-item">
+            <span>The DOGS Alpha 3.0</span>
+            <span class="update-date">Новое: Большое обновление карты</span>
+        </div>
+    </div>
 
-  <!-- Уведомление -->
-  <div class="notification" id="notification">
-    Файл скачан. Откройте его, чтобы начать установку.
-  </div>
+    <div class="app-container">
+        <!-- Обновлённые карточки приложений -->
+        <div class="app-card">
+            <img src="https://github.com/Wroom-Studio/wroom_for_launcher/releases/download/wroomicon/Wroom.png" 
+                 alt="Wroom Icon" class="app-icon">
+            <h2 class="app-title">Wroom</h2>
+            <p class="developer">Разработчик: Wroom Studio и Gulya TV Games</p>
+            <p class="version">Текущая версия: Alpha 1.0.11.3</p>
+            <p class="description">Wroom - это симулятор вождения с большим выбором пиксельных машин.</p>
+            <button class="download-btn install-button" data-apk="https://github.com/Wroom-Studio/wroom_for_launcher/releases/download/1.0.11.3-alpha-test/Wroom_Alpha_Test_1.0.11.3_Android.apk">
+                Установить
+            </button>
+        </div>
 
-  <script>
-    // Список приложений
-    const apps = [
-      {
-        name: "The DOGS",
-        description: "Описание: The DOGS - это игра, которая позволяет игрокам окунуться в жизнь собаки.",
-        dev: "Разработчик: Gulya TV Games",
-        pub: "Издатель: Gulya TV Games",
-        ver: "Версия: Alpha 3.0",
-        ver_test: "Тест. версия: Beta 0.5",
-        message: "Beta 0.5 отсутствует, т.е. тестовой версии нет для Android",
-        downloadUrl: "https://github.com/GulyaTV/TheDOGS_for_launcher/releases/download/3.0-alpha/The_DOGS_Alpha_3.0_Android.apk",
-        downloadUrltest: "https://github.com/GulyaTV/TheDOGS_for_launcher/releases/download/3.0-alpha/The_DOGS_Alpha_3.0_Android.apk"
-      },
-      {
-        name: "Wroom",
-        description: "Описание: Wroom - это симулятор вождения, в игре есть большой выбор пиксельных машин.",
-        dev: "Разработчик: Wroom Studio и Gulya TV Games",
-        pub: "Издатель: Gulya TV Games",
-        ver: "Версия: Alpha 1.0.11.3",
-        ver_test: "Тест. версия: Alpha 1.0.12",
-        message: "Alpha 1.0.12 - тествая версия, т.е. могут присутствовать баги", 
-        downloadUrl: "https://github.com/Wroom-Studio/wroom_for_launcher/releases/download/1.0.11.3-alpha-test/Wroom_Alpha_Test_1.0.11.3_Android.apk",
-        downloadUrltest: "https://github.com/Wroom-Studio/wroom_for_launcher/releases/download/1.0.12-alpha/Wroom_Alpha_1.0.12_Android.apk"
-      }
-    ];
+        <div class="app-card">
+            <img src="https://github.com/GulyaTV/TheDOGS_for_launcher/releases/download/thedogsicon/TheDOGSforDogStore.png" 
+                 alt="The DOGS Icon" class="app-icon">
+            <h2 class="app-title">The DOGS</h2>
+            <p class="developer">Разработчик: Gulya TV Games</p>
+            <p class="version">Текущая версия: Alpha 3.0 Big Update</p>
+            <p class="description">Окунитесь в жизнь собаки и исследуйте открытый мир!</p>
+            <button class="download-btn install-button" data-apk="https://github.com/GulyaTV/TheDOGS_for_launcher/releases/download/3.0-alpha/The_DOGS_Alpha_3.0_Android.apk">
+                Установить
+            </button>
+        </div>
+    </div>
 
-    // Элементы DOM
-    const appList = document.getElementById("app-list");
-    const notification = document.getElementById("notification");
-    const themeSwitcher = document.getElementById("theme-switcher");
+    <div class="install-modal" id="installModal">
+        <div class="modal-close" onclick="closeModal()">×</div>
+        <h3>Инструкция по установке</h3>
+        <ol style="text-align: left; margin: 15px 0;">
+            <li>Нажмите "Скачать APK"</li>
+            <li>После скачивания откройте файл</li>
+            <li>Разрешите установку из неизвестных источников</li>
+            <li>Нажмите "Установить"</li>
+        </ol>
+        <a id="directDownload" class="download-btn">Скачать APK</a>
+    </div>
 
-    // Проверяем сохранённую тему в localStorage
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      document.documentElement.setAttribute("data-theme", savedTheme);
-      themeSwitcher.textContent = savedTheme === "dark" ? "Светлая тема" : "Тёмная тема";
-    }
+    <div class="overlay" id="overlay" onclick="closeModal()"></div>
 
-    // Переключение темы
-    themeSwitcher.addEventListener("click", () => {
-      const currentTheme = document.documentElement.getAttribute("data-theme");
-      if (currentTheme === "dark") {
-        document.documentElement.removeAttribute("data-theme");
-        themeSwitcher.textContent = "Тёмная тема";
-        localStorage.setItem("theme", "light");
-      } else {
-        document.documentElement.setAttribute("data-theme", "dark");
-        themeSwitcher.textContent = "Светлая тема";
-        localStorage.setItem("theme", "dark");
-      }
-    });
+    <script>
+        let currentAPK = '';
+        
+        document.querySelectorAll('.install-button').forEach(button => {
+            button.addEventListener('click', function() {
+                currentAPK = this.dataset.apk;
+                showModal();
+            });
+        });
 
-    // Функция для показа уведомления
-    function showNotification() {
-      notification.style.display = "block";
-      setTimeout(() => {
-        notification.style.display = "none";
-      }, 5000); // Уведомление исчезнет через 5 секунд
-    }
+        function showModal() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('installModal').style.display = 'block';
+            document.getElementById('directDownload').href = currentAPK;
+        }
 
-    // Создание карточек приложений
-    apps.forEach(app => {
-      const appCard = document.createElement("div");
-      appCard.className = "app-card";
-      appCard.innerHTML = `
-        <h2>${app.name}</h2>
-        <p>${app.description}</p>
-        <p>${app.dev}, ${app.pub}</p>
-        <p>${app.ver}, ${app.ver_test}</p>
-        <p>${app.message}</p>
-        <a href="${app.downloadUrl}" class="download-btn" download>Скачать APK</a>
-        <a href="${app.downloadUrltest}" class="download-btn" download>Скачать тестовуй версию</a>
-      `;
-      appList.appendChild(appCard);
+        function closeModal() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('installModal').style.display = 'none';
+        }
 
-      // Добавляем обработчик события для кнопки скачивания
-      const downloadButton = appCard.querySelector(".download-btn");
-      downloadButton.addEventListener("click", () => {
-        showNotification();
-      });
-    });
-  </script>
+        // Попытка использования File System API для продвинутой установки
+        async function handleFile() {
+            try {
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: 'app.apk',
+                    types: [{
+                        description: 'APK Files',
+                        accept: {'application/vnd.android.package-archive': ['.apk']},
+                    }],
+                });
+                
+                const response = await fetch(currentAPK);
+                const blob = await response.blob();
+                const writable = await handle.createWritable();
+                await writable.write(blob);
+                await writable.close();
+                
+                // Попытка запуска установки (работает не во всех браузерах)
+                if ('launchQueue' in window) {
+                    launchQueue.setConsumer(async (launchParams) => {
+                        const files = launchParams.files;
+                        if (files.length > 0) {
+                            const fileHandle = files[0];
+                            const file = await fileHandle.getFile();
+                            await installAPK(file);
+                        }
+                    });
+                }
+            } catch (err) {
+                console.error('Error saving file:', err);
+            }
+        }
+
+        async function installAPK(file) {
+            // Эмуляция установки через Intent (для Android)
+            if (navigator.userAgent.toLowerCase().includes('android')) {
+                const url = URL.createObjectURL(file);
+                window.location.href = `intent://${url}#Intent;action=android.intent.action.VIEW;type=application/vnd.android.package-archive;end`;
+            }
+        }
+    </script>
 </body>
 </html>
